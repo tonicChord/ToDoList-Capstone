@@ -1,0 +1,47 @@
+<%- include("partials/header.ejs") %>
+    
+    <% if (currentUrl==='/' ) { %>
+        <% let date=new Date(); %>
+            <% date=date.toDateString(); %>
+                <h1>
+                    <%= date %>
+                </h1>
+                <form action="/" method="POST">
+                    <input type="text" name="task">
+                    <button type="submit">Add a Task</button>
+                </form>
+
+                <ul>
+                    <% for (let i=0; i<dailyTasks.length; i++) {%>
+                        <li>
+                            <div>
+                                <input type="checkbox" <% if(dailyTasks[i].done){ %> checked <% } %> />
+                                    <p>
+                                        <%= dailyTasks[i].name %>
+                                    </p>
+                            </>
+                        </li>
+                        <% } %>
+                </ul>
+                <% } else { %>
+                    <h1>WORK TO DO LIST</h1>
+                    <form action="/work" method="POST">
+                        <input type="text" name="task">
+                        <button type="submit">Add a Task</button>
+                    </form>
+
+                    <ul>
+                        <% for (let i=0; i<workTasks.length; i++) {%>
+                            <li>
+                                <div>
+                                    <input type="checkbox" <% if(workTasks[i].done){ %> checked <% } %> />
+                                        <p>
+                                            <%= workTasks[i].name %>
+                                        </p>
+                                </>
+                            </li>
+                            <% } %>
+                    </ul>
+                    <% } %>
+                        
+                        <%- include("partials/footer.ejs") %>
